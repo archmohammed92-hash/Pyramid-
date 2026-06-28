@@ -353,6 +353,7 @@ header h1 {
   <button class="tab active" onclick="showTab('rules')"><i class="fas fa-list-ul"></i> القواعد</button>
   <button class="tab" onclick="showTab('predict')"><i class="fas fa-futbol"></i> توقعاتي</button>
   <button class="tab" onclick="showTab('leaderboard')"><i class="fas fa-trophy"></i> الترتيب</button>
+  <button class="tab" onclick="showTab('bracket')"><i class="fas fa-sitemap"></i> الشارت</button>
   <button class="tab" onclick="showTab('live')"><i class="fas fa-broadcast-tower"></i> نتايج حية</button>
   <button class="tab" onclick="showTab('dailyPredictions')"><i class="fas fa-calendar-day"></i> توقعات اليوم</button>
   <button class="tab" onclick="showTab('chat')"><i class="fas fa-comments"></i> نقاشات</button>
@@ -365,12 +366,97 @@ header h1 {
     <ul style="list-style: none;">
       <li style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="background: var(--egypt-gold); color: #1a1a1a; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">1</span><div>كل واحد يسجل اسمه مره واحدة — وبعد كده يبقى ليه بروفايل ثابت</div></li>
       <li style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="background: var(--egypt-gold); color: #1a1a1a; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">2</span><div>التوقع بيتقفل وقت بداية الماتش — مينفعش تغيّر بعد كده</div></li>
-     <li style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="background: var(--egypt-gold); color: #1a1a1a; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">3</span><div><strong style="color:var(--egypt-gold)">النتيجة الصح تماماً:</strong> +٣ نقط</div></li>
-<li style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="background: var(--egypt-gold); color: #1a1a1a; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">4</span><div><strong style="color:var(--egypt-gold)">توقعت الفايز وفارق الأهداف صح:</strong> +٢ نقطة</div></li>
-<li style="display: flex; gap: 12px; margin-bottom: 12px;"><span style="background: var(--egypt-gold); color: #1a1a1a; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">5</span><div><strong style="color:var(--egypt-gold)">توقعت الفايز بس (أو التعادل):</strong> +١ نقطة</div></li>
-<li style="display: flex; gap: 12px;"><span style="background: var(--egypt-gold); color: #1a1a1a; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">6</span><div><strong style="color:var(--egypt-gold)">توقع البطل الكلي:</strong> +٥ نقط بونص</div></li>
+      <li style="display: flex; gap: 12px;"><span style="background: var(--egypt-gold); color: #1a1a1a; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 900;">3</span><div><strong style="color:var(--egypt-gold)">توقع البطل الكلي:</strong> +٥ نقط بونص</div></li>
     </ul>
   </div>
+
+  <!-- دور المجموعات -->
+  <div class="card">
+    <h2><i class="fas fa-layer-group"></i> نقاط دور المجموعات</h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="background:linear-gradient(135deg,rgba(46,204,64,0.15),rgba(46,204,64,0.05));border:1px solid rgba(46,204,64,0.4);border-radius:14px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-weight:800;color:#80f0a0;">🎯 النتيجة بالضبط</span>
+          <span style="background:#1a5c2e;color:#80f0a0;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">+٣</span>
+        </div>
+        <div style="font-size:12px;color:var(--egypt-gray);">مثال: توقعت <strong style="color:white;">٢-١</strong> وطلعت <strong style="color:var(--egypt-gold);">٢-١</strong> ✅</div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(52,152,219,0.15),rgba(52,152,219,0.05));border:1px solid rgba(52,152,219,0.4);border-radius:14px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-weight:800;color:#a0c0ff;">✅ الفائز بس (أو التعادل)</span>
+          <span style="background:#1a3a5c;color:#a0c0ff;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">+١</span>
+        </div>
+        <div style="font-size:12px;color:var(--egypt-gray);">مثال: توقعت <strong style="color:white;">٢-١ برازيل</strong> وطلعت <strong style="color:var(--egypt-gold);">٣-١ برازيل</strong> ✅</div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(196,30,30,0.15),rgba(196,30,30,0.05));border:1px solid rgba(196,30,30,0.3);border-radius:14px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-weight:800;color:#ff9090;">❌ توقع غلط تماماً</span>
+          <span style="background:#5c1a1a;color:#ff9090;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">٠</span>
+        </div>
+        <div style="font-size:12px;color:var(--egypt-gray);">مثال: توقعت <strong style="color:white;">٢-١ برازيل</strong> وطلعت <strong style="color:var(--egypt-gold);">٠-١ اليابان</strong> ❌</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- دور الإقصاء -->
+  <div class="card">
+    <h2><i class="fas fa-bolt"></i> نقاط دور الإقصاء (من دور الـ٣٢ فما فوق)</h2>
+    <p style="font-size:12px;color:var(--egypt-gray);margin-bottom:12px;">في الإقصاء بتتوقع النتيجة + لو توقعت تعادل بتختار مين هيكسب بضربات الجزاء</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+
+     <div style="background:linear-gradient(135deg,rgba(255,215,0,0.15),rgba(255,215,0,0.05));border:1px solid rgba(255,215,0,0.5);border-radius:14px;padding:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <span style="font-weight:800;color:#ffd700;">🏆 تعادل + جزاء صح + نتيجة صح</span>
+    <span style="background:#4a3800;color:#ffd700;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">+٤</span> <!-- تغيرت من ٣ لـ ٤ -->
+  </div>
+  <div style="font-size:12px;color:var(--egypt-gray);">مثال: توقعت <strong style="color:white;">٢-٢ وبرازيل بالجزاء</strong> وطلعت <strong style="color:var(--egypt-gold);">٢-٢ وبرازيل فعلاً</strong> ✅</div>
+</div>
+
+      <div style="background:linear-gradient(135deg,rgba(46,204,64,0.15),rgba(46,204,64,0.05));border:1px solid rgba(46,204,64,0.4);border-radius:14px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-weight:800;color:#80f0a0;">🎯 نتيجة بالضبط (بدون جزاء)</span>
+          <span style="background:#1a5c2e;color:#80f0a0;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">+٣</span>
+        </div>
+        <div style="font-size:12px;color:var(--egypt-gray);">مثال: توقعت <strong style="color:white;">٢-١ برازيل</strong> وطلعت <strong style="color:var(--egypt-gold);">٢-١ برازيل</strong> (من غير جزاء) ✅</div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(155,89,182,0.15),rgba(155,89,182,0.05));border:1px solid rgba(155,89,182,0.4);border-radius:14px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-weight:800;color:#d7a8f0;">⚡ تعادل + جزاء صح + نتيجة غلط</span>
+          <span style="background:#3a1a5c;color:#d7a8f0;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">+٢</span>
+        </div>
+        <div style="font-size:12px;color:var(--egypt-gray);">مثال: توقعت <strong style="color:white;">٢-٢ وبرازيل بالجزاء</strong> وطلعت <strong style="color:var(--egypt-gold);">١-١ وبرازيل فعلاً</strong> ✅</div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(52,152,219,0.15),rgba(52,152,219,0.05));border:1px solid rgba(52,152,219,0.4);border-radius:14px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-weight:800;color:#a0c0ff;">✅ توقعت مين عدى (غلط في النتيجة)</span>
+          <span style="background:#1a3a5c;color:#a0c0ff;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">+١</span>
+        </div>
+        <div style="font-size:12px;color:var(--egypt-gray);display:flex;flex-direction:column;gap:4px;">
+          <span>مثال ١: توقعت <strong style="color:white;">٢-١ برازيل</strong> وطلعت <strong style="color:var(--egypt-gold);">١-٠ برازيل</strong> ✅</span>
+          <span>مثال ٢: توقعت <strong style="color:white;">٢-١ برازيل</strong> وطلعت <strong style="color:var(--egypt-gold);">١-١ وبرازيل بالجزاء</strong> ✅</span>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(52,152,219,0.10),rgba(52,152,219,0.03));border:1px solid rgba(52,152,219,0.3);border-radius:14px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-weight:800;color:#a0c0ff;">✅ توقعت تعادل صح + غلطت في الجزاء</span>
+          <span style="background:#1a3a5c;color:#a0c0ff;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">+١</span>
+        </div>
+        <div style="font-size:12px;color:var(--egypt-gray);">مثال: توقعت <strong style="color:white;">١-١ وبرازيل بالجزاء</strong> وطلعت <strong style="color:var(--egypt-gold);">١-١ واليابان كسبت بالجزاء</strong></div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(196,30,30,0.15),rgba(196,30,30,0.05));border:1px solid rgba(196,30,30,0.3);border-radius:14px;padding:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-weight:800;color:#ff9090;">❌ توقع غلط تماماً</span>
+          <span style="background:#5c1a1a;color:#ff9090;padding:4px 14px;border-radius:20px;font-weight:900;font-size:18px;">٠</span>
+        </div>
+        <div style="font-size:12px;color:var(--egypt-gray);">مثال: توقعت <strong style="color:white;">٢-١ برازيل</strong> وطلعت <strong style="color:var(--egypt-gold);">٢-١ اليابان</strong> ❌</div>
+      </div>
+    </div>
+  </div>
+
   <div class="card">
     <h2><i class="fas fa-gift"></i> الجايزة</h2>
     <div style="background: linear-gradient(135deg, rgba(196,30,30,0.15), rgba(196,30,30,0.05)); border-radius: 16px; padding: 16px; text-align: center;">
@@ -415,6 +501,15 @@ header h1 {
   <div class="card" id="lb-champion-section" style="display:none">
     <h2><i class="fas fa-star-of-life"></i> توقعات البطل</h2>
     <div id="lb-champions"></div>
+  </div>
+</div>
+
+<div id="bracket" class="section">
+  <div class="card">
+    <h2><i class="fas fa-sitemap"></i> شارت البطولة</h2>
+    <div id="bracket-container">
+      <div class="empty"><span class="spinner"></span> جاري التحميل...</div>
+    </div>
   </div>
 </div>
 
@@ -654,6 +749,160 @@ function renderRules() {
 }
 const ALL_TEAMS = [...new Set(GROUP_STAGE_MATCHES.flatMap(m=>[m.teamA, m.teamB]))].sort((a,b)=>a.localeCompare(b,'ar'));
 
+// ==================== KNOCKOUT STAGES DATA ====================
+
+// دور الـ٣٢ - 16 ماتش (مرتبة زمنياً)
+const ROUND_OF_32_MATCHES = [
+  { id: "r32_1", teamA: "جنوب أفريقيا 🇿🇦", teamB: "كندا 🇨🇦", date: "2026-06-28T22:00:00" },
+  { id: "r32_2", teamA: "البرازيل 🇧🇷", teamB: "اليابان 🇯🇵", date: "2026-06-29T20:00:00" },
+  { id: "r32_3", teamA: "ألمانيا 🇩🇪", teamB: "باراغواي 🇵🇾", date: "2026-06-29T23:30:00" },
+  { id: "r32_4", teamA: "هولندا 🇳🇱", teamB: "المغرب 🇲🇦", date: "2026-06-30T04:00:00" },
+  { id: "r32_5", teamA: "كوت ديفوار 🇨🇮", teamB: "النرويج 🇳🇴", date: "2026-06-30T20:00:00" },
+  { id: "r32_6", teamA: "فرنسا 🇫🇷", teamB: "السويد 🇸🇪", date: "2026-07-01T00:00:00" },
+  { id: "r32_7", teamA: "المكسيك 🇲🇽", teamB: "الإكوادور 🇪🇨", date: "2026-07-01T04:00:00" },
+  { id: "r32_8", teamA: "إنجلترا 🏴󠁧󠁢󠁥󠁮󠁧󠁿", teamB: "الكونغو 🇨🇩", date: "2026-07-01T19:00:00" },
+  { id: "r32_9", teamA: "بلجيكا 🇧🇪", teamB: "السنغال 🇸🇳", date: "2026-07-01T23:00:00" },
+  { id: "r32_10", teamA: "أمريكا 🇺🇸", teamB: "البوسنة 🇧🇦", date: "2026-07-02T03:00:00" },
+  { id: "r32_11", teamA: "إسبانيا 🇪🇸", teamB: "النمسا 🇦🇹", date: "2026-07-02T22:00:00" },
+  { id: "r32_12", teamA: "البرتغال 🇵🇹", teamB: "كرواتيا 🇭🇷", date: "2026-07-03T02:00:00" },
+  { id: "r32_13", teamA: "سويسرا 🇨🇭", teamB: "الجزائر 🇩🇿", date: "2026-07-03T06:00:00" },
+  { id: "r32_14", teamA: "أستراليا 🇦🇺", teamB: "مصر 🇪🇬", date: "2026-07-03T21:00:00" },
+  { id: "r32_15", teamA: "الأرجنتين 🇦🇷", teamB: "كاب فيردي 🇨🇻", date: "2026-07-04T01:00:00" },
+  { id: "r32_16", teamA: "كولومبيا 🇨🇴", teamB: "غانا 🇬🇭", date: "2026-07-04T04:30:00" }
+];
+
+// دور الـ١٦ - 8 ماتشات (الفائز من ماتشات دور الـ٣٢)
+const ROUND_OF_16_MATCHES = [
+  // Match A: الفائز من 1 × الفائز من 4
+  { id: "r16_1", teamA: "الفائز من (جنوب أفريقيا × كندا)", teamB: "الفائز من (هولندا × المغرب)", date: "2026-07-04T20:00:00" },
+  // Match B: الفائز من 2 × الفائز من 5
+  { id: "r16_2", teamA: "الفائز من (البرازيل × اليابان)", teamB: "الفائز من (كوت ديفوار × النرويج)", date: "2026-07-05T23:00:00" },
+  // Match C: الفائز من 3 × الفائز من 6
+  { id: "r16_3", teamA: "الفائز من (ألمانيا × باراغواي)", teamB: "الفائز من (فرنسا × السويد)", date: "2026-07-05T00:00:00" },
+  // Match D: الفائز من 7 × الفائز من 8
+  { id: "r16_4", teamA: "الفائز من (المكسيك × الإكوادور)", teamB: "الفائز من (إنجلترا × الكونغو)", date: "2026-07-06T03:00:00" },
+  // Match E: الفائز من 9 × الفائز من 10
+  { id: "r16_5", teamA: "الفائز من (بلجيكا × السنغال)", teamB: "الفائز من (أمريكا × البوسنة)", date: "2026-07-07T03:00:00" },
+  // Match F: الفائز من 11 × الفائز من 12
+  { id: "r16_6", teamA: "الفائز من (إسبانيا × النمسا)", teamB: "الفائز من (البرتغال × كرواتيا)", date: "2026-07-06T22:00:00" },
+  // Match G: الفائز من 13 × الفائز من 16
+  { id: "r16_7", teamA: "الفائز من (سويسرا × الجزائر)", teamB: "الفائز من (كولومبيا × غانا)", date: "2026-07-07T23:00:00" },
+  // Match H: الفائز من 14 × الفائز من 15
+  { id: "r16_8", teamA: "الفائز من (أستراليا × مصر)", teamB: "الفائز من (الأرجنتين × كاب فيردي)", date: "2026-07-07T19:00:00" }
+];
+
+// ربع النهائي - 4 ماتشات
+const QUARTER_FINAL_MATCHES = [
+  // Match T (ط): الفائز من A × الفائز من C
+  { id: "qf_1", teamA: "الفائز من (ر16-1)", teamB: "الفائز من (ر16-3)", date: "2026-07-09T23:00:00" },
+  // Match Y (ي): الفائز من B × الفائز من D
+  { id: "qf_2", teamA: "الفائز من (ر16-2)", teamB: "الفائز من (ر16-4)", date: "2026-07-12T00:00:00" },
+  // Match K (ك): الفائز من E × الفائز من F
+  { id: "qf_3", teamA: "الفائز من (ر16-5)", teamB: "الفائز من (ر16-6)", date: "2026-07-10T22:00:00" },
+  // Match L (ل): الفائز من G × الفائز من H
+  { id: "qf_4", teamA: "الفائز من (ر16-7)", teamB: "الفائز من (ر16-8)", date: "2026-07-12T04:00:00" }
+];
+
+// نصف النهائي - 2 ماتشات
+const SEMI_FINAL_MATCHES = [
+  // Match M (م): الفائز من ط × الفائز من ك
+  { id: "sf_1", teamA: "الفائز من (ربع-1)", teamB: "الفائز من (ربع-3)", date: "2026-07-14T22:00:00" },
+  // Match N (ن): الفائز من ي × الفائز من ل
+  { id: "sf_2", teamA: "الفائز من (ربع-2)", teamB: "الفائز من (ربع-4)", date: "2026-07-15T22:00:00" }
+];
+
+// النهائي - 1 ماتش
+const FINAL_MATCH = [
+  { id: "final_1", teamA: "الفائز من (نصف-1)", teamB: "الفائز من (نصف-2)", date: "2026-07-19T22:00:00" }
+];
+
+// مباراة المركز الثالث - الخاسر من نصف النهائي 1 × الخاسر من نصف النهائي 2
+const THIRD_PLACE_MATCH = [
+  { id: "third_place_1", teamA: "الخاسر من (نصف-1)", teamB: "الخاسر من (نصف-2)", date: "2026-07-18T18:00:00" }
+];
+
+// ==================== AUTO-GENERATE KNOCKOUT STAGES ====================
+function autoGenerateKnockoutStages() {
+  if (!areGroupStagesComplete()) {
+    showToast('استنى المجموعات تخلص', 'error');
+    return;
+  }
+
+  let added = false;
+  const existingIds = FB_STAGES.map(s => s.id);
+
+  // دور الـ٣٢
+  if (!existingIds.includes('round_of_32')) {
+    FB_STAGES.push({
+      id: 'round_of_32',
+      label: 'دور الـ٣٢',
+      matches: ROUND_OF_32_MATCHES.map(m => ({ ...m, dateText: formatDateTime(new Date(m.date)) }))
+    });
+    added = true;
+  }
+
+  // دور الـ١٦
+  if (!existingIds.includes('round_of_16')) {
+    FB_STAGES.push({
+      id: 'round_of_16',
+      label: 'دور الـ١٦',
+      matches: ROUND_OF_16_MATCHES.map(m => ({ ...m, dateText: formatDateTime(new Date(m.date)) }))
+    });
+    added = true;
+  }
+
+  // ربع النهائي
+  if (!existingIds.includes('quarter_final')) {
+    FB_STAGES.push({
+      id: 'quarter_final',
+      label: 'ربع النهائي',
+      matches: QUARTER_FINAL_MATCHES.map(m => ({ ...m, dateText: formatDateTime(new Date(m.date)) }))
+    });
+    added = true;
+  }
+
+  // نصف النهائي
+  if (!existingIds.includes('semi_final')) {
+    FB_STAGES.push({
+      id: 'semi_final',
+      label: 'نصف النهائي',
+      matches: SEMI_FINAL_MATCHES.map(m => ({ ...m, dateText: formatDateTime(new Date(m.date)) }))
+    });
+    added = true;
+  }
+
+  // ✅ مباراة الثالث
+  if (!existingIds.includes('third_place')) {
+    FB_STAGES.push({
+      id: 'third_place',
+      label: 'مباراة الثالث',
+      matches: THIRD_PLACE_MATCH.map(m => ({ ...m, dateText: formatDateTime(new Date(m.date)) }))
+    });
+    added = true;
+  }
+
+  // النهائي
+  if (!existingIds.includes('final')) {
+    FB_STAGES.push({
+      id: 'final',
+      label: 'النهائي',
+      matches: FINAL_MATCH.map(m => ({ ...m, dateText: formatDateTime(new Date(m.date)) }))
+    });
+    added = true;
+  }
+
+  if (added) {
+    fbSet('stages', FB_STAGES);
+    showToast('✅ تم إنشاء جميع الأدوار الإقصائية!');
+    renderAdminPanel();
+    renderPredictStages();
+    renderBracket();
+  } else {
+    showToast('✅ الأدوار الإقصائية موجودة بالفعل');
+  }
+}
+// ==================== END KNOCKOUT STAGES ====================
+
 // State
 let FB_STAGES = null, FB_RESULTS = {}, FB_PREDS = {}, FB_SCORES = {}, FB_PASS = 'admin2026', FB_CHAMP = null;
 let currentPredStage = 0, adminCurrentStage = 0, adminLoggedIn = false;
@@ -697,10 +946,11 @@ function showTab(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-const tabs = ['rules', 'predict', 'leaderboard', 'live', 'dailyPredictions', 'chat', 'admin'];
+const tabs = ['rules', 'predict', 'leaderboard', 'bracket', 'live', 'dailyPredictions', 'chat', 'admin'];
   tabs.forEach((n, i) => { if (n === id) document.querySelectorAll('.tab')[i].classList.add('active'); });
   if (id === 'predict') { fillChampionDropdown(); renderPredictStages(); }
   if (id === 'leaderboard') renderLeaderboard();
+  if (id === 'bracket') renderBracket();
   if (id === 'admin') renderAdminPanel();
   if (id === 'chat') loadChatMessages();
   if (id === 'dailyPredictions') loadDailyPredictions();
@@ -962,12 +1212,23 @@ async function loadDailyPredictions() {
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">`;
     
     for (const player of players) {
-      const prediction = FB_PREDS[player]?.matches?.[matchId];
-      if (prediction) {
-        const [scoreA, scoreB] = prediction.split('-');
+      const rawPred = FB_PREDS[player]?.matches?.[matchId];
+      if (rawPred) {
+        let scoreStr, penStr = '';
+        if (typeof rawPred === 'object') {
+          const [scoreA, scoreB] = rawPred.score.split('-');
+          scoreStr = `${scoreA} - ${scoreB}`;
+          if (rawPred.penalty) {
+            const match = todayMatches.find(m => m.id === matchId);
+            penStr = ` 🎯 ${rawPred.penalty==='A' ? match?.teamA : match?.teamB} بالجزاء`;
+          }
+        } else {
+          const [scoreA, scoreB] = rawPred.split('-');
+          scoreStr = `${scoreA} - ${scoreB}`;
+        }
         html += `<div class="chip" style="background:#2a2a2a;border-color:var(--egypt-gold);">
           <span style="color:var(--egypt-gold);">${player}</span>
-          <span style="font-weight:bold;margin:0 4px;">${scoreA} - ${scoreB}</span>
+          <span style="font-weight:bold;margin:0 4px;">${scoreStr}${penStr}</span>
         </div>`;
       } else {
         html += `<div class="chip" style="background:#1a1a1a;border-color:#555;opacity:0.6;">
@@ -991,48 +1252,10 @@ function escapeHtml(str) {
   });
 }
 
-// Auto-generate knockout stages
+// Auto-generate knockout stages (old function replaced above)
 function areGroupStagesComplete() {
   const gs = FB_STAGES?.find(s => s.id === 'group_stage');
   return gs && gs.matches.every(m => FB_RESULTS[m.id]);
-}
-function autoGenerateKnockoutStages() {
-  if (!areGroupStagesComplete()) { showToast('استنى المجموعات تخلص', 'error'); return; }
-  let added = false;
-  const existing = FB_STAGES.map(s => s.id);
-  const stages = [
-    { id: 'round_of_32', label: 'دور الـ٣٢', matches: 16 },
-    { id: 'round_of_16', label: 'دور الـ١٦', matches: 8 },
-    { id: 'quarter_final', label: 'ربع النهائي', matches: 4 },
-    { id: 'semi_final', label: 'نصف النهائي', matches: 2 },
-    { id: 'third_place', label: 'مباراة الثالث', matches: 1 },
-    { id: 'final', label: 'النهائي', matches: 1 }
-  ];
-  let baseDate = new Date('2026-06-29T14:00:00');
-  for (let stage of stages) {
-    if (!existing.includes(stage.id)) {
-      const matches = [];
-      for (let i = 0; i < stage.matches; i++) {
-        const d = new Date(baseDate);
-        d.setDate(baseDate.getDate() + Math.floor(i / 2));
-        matches.push({
-          id: `${stage.id}_${i+1}`,
-          teamA: 'لم يحدد بعد',
-          teamB: 'لم يحدد بعد',
-          date: d.toISOString(),
-          dateText: formatDateTime(d)
-        });
-      }
-      FB_STAGES.push({ id: stage.id, label: stage.label, matches });
-      added = true;
-    }
-  }
-  if (added) {
-    fbSet('stages', FB_STAGES);
-    showToast('تم إنشاء الأدوار الإقصائية!');
-    renderAdminPanel();
-    renderPredictStages();
-  }
 }
 
 // Predict functions
@@ -1061,33 +1284,148 @@ function switchPredStage(i) {
   document.querySelectorAll('#predict-stages-nav .inner-tab').forEach((b, j) => b.classList.toggle('active', i === j));
   renderPredictMatches(i);
 }
+function isKnockoutStage(stageId) {
+  return stageId && stageId !== 'group_stage';
+}
+
+function getKnockoutNote(m, pred, res) {
+  if (!res || !pred) return '';
+  const isKO = isKnockoutStage(FB_STAGES?.find(s => s.matches?.some(x => x.id === m.id))?.id);
+
+  if (!isKO) {
+    // دور المجموعات
+    const [pa, pb] = pred.score.split('-').map(Number);
+    if (pa === res.a && pb === res.b) return '<div style="background:#1a5c2e;padding:4px 8px;border-radius:12px;margin-top:6px;text-align:center;"><span style="color:#80f0a0;">🎯 نتيجة صح بالكامل! +٣ نقاط</span></div>';
+    const rw = res.a > res.b ? 'A' : res.b > res.a ? 'B' : 'D';
+    const pw = pa > pb ? 'A' : pb > pa ? 'B' : 'D';
+    if (rw === pw) return '<div style="background:#1a3a5c;padding:4px 8px;border-radius:12px;margin-top:6px;text-align:center;"><span style="color:#a0c0ff;">✅ الفائز صح! +١ نقطة</span></div>';
+    return '<div style="background:#5c1a1a;padding:4px 8px;border-radius:12px;margin-top:6px;text-align:center;"><span style="color:#ff9090;">❌ توقع خاطئ! ٠ نقطة</span></div>';
+  }
+
+  // دور الإقصاء
+  const pts = calcKOPoints(pred, res);
+  const [pa, pb] = pred.score.split('-').map(Number);
+  const predScoreStr = `${pa}-${pb}${pred.penalty ? ' ('+pred.penalty+' بالجزاء)' : ''}`;
+  const resScoreStr = `${res.a}-${res.b}${res.penalty ? ' ('+res.penalty+' بالجزاء)' : ''}`;
+  const colors = { 
+  4: ['#4a3800','#ffd700','🏆'], 
+  3: ['#1a5c2e','#80f0a0','🎯'], 
+  2: ['#3a1a5c','#d7a8f0','⚡'], 
+  1: ['#1a3a5c','#a0c0ff','✅'], 
+  0: ['#5c1a1a','#ff9090','❌'] 
+};
+  const [bg, col, icon] = colors[pts];
+  const labels = { 
+  4: `🏆 توقعك صح بالكامل! (تعادل + جزاء) +٤ نقاط`, 
+  3: `🎯 نتيجة صح بالكامل! +٣ نقاط`, 
+  2: `⚡ تعادل + جزاء صح! +٢ نقطة`, 
+  1: `✅ عرفت مين عدى! +١ نقطة`, 
+  0: `❌ توقع خاطئ! ٠ نقطة` 
+};
+  return `<div style="background:${bg};padding:6px 8px;border-radius:12px;margin-top:6px;text-align:center;">
+    <span style="color:${col};font-size:12px;">${labels[pts]}</span><br>
+    <span style="font-size:11px;color:rgba(255,255,255,0.6);">توقعك: ${predScoreStr} | النتيجة: ${resScoreStr}</span>
+  </div>`;
+}
+
+function calcKOPoints(pred, res) {
+  const [pa, pb] = pred.score.split('-').map(Number);
+  const isDrawPred = pa === pb;
+  const isDrawRes = res.a === res.b;
+
+  // حالة 1: نتيجة بالضبط بدون جزاء → 3 نقاط
+  if (pa === res.a && pb === res.b && !isDrawRes) return 3;
+
+  // حالة 2: تعادل + جزاء صح + نتيجة صح → 4 نقاط
+  if (isDrawPred && isDrawRes) {
+    if (pred.penalty && res.penalty && pred.penalty === res.penalty) {
+      if (pa === res.a && pb === res.b) return 4; // ← تغيرت من 3 لـ 4
+    }
+    // حالة 3: تعادل صح + جزاء صح + نتيجة غلط → 2 نقطة
+    if (pred.penalty && res.penalty && pred.penalty === res.penalty) {
+      return 2;
+    }
+    // حالة 4: تعادل صح + جزاء غلط → 1 نقطة
+    return 1;
+  }
+
+  // حالة 5: مين عدى (غلط في النتيجة) → 1 نقطة
+  const predWinner = pa > pb ? 'A' : pa < pb ? 'B' : (pred.penalty === 'A' || pred.penalty === 'B' ? pred.penalty : null);
+  const resWinner = res.a > res.b ? 'A' : res.a < res.b ? 'B' : (res.penalty === 'A' || res.penalty === 'B' ? res.penalty : null);
+  if (predWinner && resWinner && predWinner === resWinner) return 1;
+  
+  // حالة 6: غلط تماماً → 0
+  return 0;
+}
+
 function renderPredictMatches(si) {
   const stage = FB_STAGES?.[si];
   if (!stage) { document.getElementById('predict-matches-container').innerHTML = ''; return; }
   const name = CURRENT_PLAYER || document.getElementById('player-name').value.trim();
   const preds = name && FB_PREDS[name] ? FB_PREDS[name].matches || {} : {};
   const sortedMatches = [...stage.matches].sort((a, b) => new Date(a.date) - new Date(b.date));
+  const isKO = isKnockoutStage(stage.id);
   let html = '';
+
   sortedMatches.forEach(m => {
-    const started = matchStarted(m.date), res = FB_RESULTS[m.id], pred = preds[m.id];
-    const badge = res ? `<span style="color:var(--egypt-gold);">✅ ${res.a}-${res.b}</span>` : started ? `<span style="color:#ff9090;">🔒 مغلق</span>` : `<span style="color:#80f0a0;">✅ مفتوح</span>`;
-    let note = '';
-    if (res && pred) {
-      const [pa, pb] = pred.split('-').map(Number);
-      if (pa === res.a && pb === res.b) note = '<div style="background:#1a5c2e;padding:4px 8px;border-radius:12px;margin-top:6px;text-align:center;"><span style="color:#80f0a0;">🎯 توقعك صحيح بالكامل! +٣ نقاط</span></div>';
-      else {
-        const rw = res.a > res.b ? 'A' : res.b > res.a ? 'B' : 'D';
-        const pw = pa > pb ? 'A' : pb > pa ? 'B' : 'D';
-        if (rw === pw) note = '<div style="background:#1a3a5c;padding:4px 8px;border-radius:12px;margin-top:6px;text-align:center;"><span style="color:#a0c0ff;">✅ توقعت الفائز فقط! +١ نقطة</span></div>';
-        else note = '<div style="background:#5c1a1a;padding:4px 8px;border-radius:12px;margin-top:6px;text-align:center;"><span style="color:#ff9090;">❌ توقع خاطئ! ٠ نقطة</span></div>';
+    const started = matchStarted(m.date), res = FB_RESULTS[m.id];
+    
+    // ✅ نفس طريقة الكود القديم بالضبط
+    const pred = preds[m.id]; // دي string زي "2-1" في دور المجموعات
+    
+    // للتأكد من التعامل مع object في دور الإقصاء
+    let predObj = null;
+    let predScore = pred;
+    let predPenalty = null;
+    
+    if (pred) {
+      if (typeof pred === 'object') {
+        // دور الإقصاء - object {score: "2-1", penalty: "A"}
+        predScore = pred.score;
+        predPenalty = pred.penalty;
+        predObj = pred;
+      } else {
+        // دور المجموعات - string "2-1"
+        predScore = pred;
+        predObj = { score: pred, penalty: null };
       }
-    } else if (pred) {
-      const [pa, pb] = pred.split('-');
-      note = `📝 توقعك: ${pa}-${pb}`;
     }
-    const [curA, curB] = pred ? pred.split('-').map(Number) : ['', ''];
+
+    const badge = res
+      ? `<span style="color:var(--egypt-gold);">✅ ${res.a}-${res.b}${res.penalty ? ' (+جزاء: '+(res.penalty==='A'?m.teamA:m.teamB)+')' : ''}</span>`
+      : started ? `<span style="color:#ff9090;">🔒 مغلق</span>` : `<span style="color:#80f0a0;">✅ مفتوح</span>`;
+
+    let note = '';
+    if (res && predObj) {
+      note = getKnockoutNote(m, predObj, res);
+    } else if (!res && predScore) {
+      const [pa, pb] = predScore.split('-');
+      const penStr = predPenalty ? ` (${predPenalty==='A'?m.teamA:m.teamB} بالجزاء)` : '';
+      note = `<div style="margin-top:6px;text-align:center;font-size:12px;color:var(--egypt-gray);">📝 توقعك: ${pa}-${pb}${penStr}</div>`;
+    }
+
+    // ✅ نفس طريقة الكود القديم في استخراج الأرقام
+    const [curA, curB] = predScore ? predScore.split('-').map(Number) : ['', ''];
+    const curPenalty = predPenalty || '';
     const dis = started ? 'disabled' : '';
     const isEgypt = m.teamA.includes('مصر') || m.teamB.includes('مصر');
+
+    // خانة ضربات الجزاء
+    let penaltyHtml = '';
+    if (isKO && !started && !res) {
+      const showPen = curA !== '' && curB !== '' && Number(curA) === Number(curB);
+      penaltyHtml = `<div id="pen_row_${m.id}" style="margin-top:10px;padding:10px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);border-radius:12px;display:${showPen ? 'block' : 'none'};">
+        <div style="font-size:12px;color:var(--egypt-gold);margin-bottom:8px;font-weight:700;">🎯 تعادل! — مين هيكسب بضربات الجزاء؟</div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="setPenalty('${m.id}','A')" id="pen_A_${m.id}" style="flex:1;padding:8px;border-radius:10px;border:2px solid ${curPenalty==='A'?'var(--egypt-gold)':'rgba(255,255,255,0.2)'};background:${curPenalty==='A'?'rgba(201,168,76,0.2)':'transparent'};color:white;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">${m.teamA}</button>
+          <button onclick="setPenalty('${m.id}','B')" id="pen_B_${m.id}" style="flex:1;padding:8px;border-radius:10px;border:2px solid ${curPenalty==='B'?'var(--egypt-gold)':'rgba(255,255,255,0.2)'};background:${curPenalty==='B'?'rgba(201,168,76,0.2)':'transparent'};color:white;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">${m.teamB}</button>
+        </div>
+      </div>`;
+    } else if (isKO && res && res.penalty) {
+      penaltyHtml = `<div style="margin-top:6px;text-align:center;font-size:12px;color:var(--egypt-gray);">⚽ الفائز بالجزاء: <strong style="color:var(--egypt-gold);">${res.penalty==='A'?m.teamA:m.teamB}</strong></div>`;
+    }
+
+    // ✅ نفس طريقة الكود القديم في العرض (توقعك فوق النتيجة)
     html += `<div class="match-card ${isEgypt ? 'egypt-match' : ''}" data-match-id="${m.id}">
       <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
         <span class="match-time">${m.dateText || ''}</span>${badge}
@@ -1095,17 +1433,18 @@ function renderPredictMatches(si) {
       <div class="score-row" style="display:grid;grid-template-columns:1fr 60px 1fr auto;gap:8px;align-items:center;">
         <div class="team-col" style="text-align:center;">
           <div class="team-nm">${m.teamA}</div>
-          ${res ? (pred ? `<div class="result-display" style="font-size:14px;">توقعك: ${curA}<br><span style="font-size:18px;">${res.a}</span></div>` : `<div class="result-display">${res.a}</div>`) : `<input type="number" class="score-input" id="pi_${m.id}_a" min="0" max="20" placeholder="0" ${curA !== '' ? `value="${curA}"` : ''} ${dis}>`}
+          ${res ? (predScore ? `<div class="result-display" style="font-size:14px;">توقعك: ${curA}<br><span style="font-size:18px;">${res.a}</span></div>` : `<div class="result-display">${res.a}</div>`) : `<input type="number" class="score-input" id="pi_${m.id}_a" min="0" max="20" placeholder="0" ${curA !== '' ? `value="${curA}"` : ''} ${dis} oninput="onScoreInput('${m.id}')">`}
         </div>
         <div class="vs-center" style="text-align:center;"><div class="vs-txt">VS</div></div>
         <div class="team-col" style="text-align:center;">
           <div class="team-nm">${m.teamB}</div>
-          ${res ? (pred ? `<div class="result-display" style="font-size:14px;">توقعك: ${curB}<br><span style="font-size:18px;">${res.b}</span></div>` : `<div class="result-display">${res.b}</div>`) : `<input type="number" class="score-input" id="pi_${m.id}_b" min="0" max="20" placeholder="0" ${curB !== '' ? `value="${curB}"` : ''} ${dis}>`}
+          ${res ? (predScore ? `<div class="result-display" style="font-size:14px;">توقعك: ${curB}<br><span style="font-size:18px;">${res.b}</span></div>` : `<div class="result-display">${res.b}</div>`) : `<input type="number" class="score-input" id="pi_${m.id}_b" min="0" max="20" placeholder="0" ${curB !== '' ? `value="${curB}"` : ''} ${dis} oninput="onScoreInput('${m.id}')">`}
         </div>
         <div style="text-align:center;">
           ${!res && !started ? `<button class="btn-save-match" onclick="saveMatchPrediction('${m.id}')" style="background:var(--egypt-gold);color:#1a1a1a;border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:bold;cursor:pointer;">💾 حفظ</button>` : ''}
         </div>
       </div>
+      ${penaltyHtml}
       ${note ? `<div style="margin-top:8px;text-align:center;font-size:12px;">${note}</div>` : ''}
     </div>`;
   });
@@ -1125,6 +1464,30 @@ function loadPlayer(name) {
   if (FB_PREDS[name]) document.getElementById('champion-pick').value = FB_PREDS[name].champion || '';
   renderPredictMatches(currentPredStage);
 }
+// penalty state tracker (in-memory per session)
+const PENDING_PENALTIES = {};
+
+function onScoreInput(matchId) {
+  const a = document.getElementById(`pi_${matchId}_a`)?.value;
+  const b = document.getElementById(`pi_${matchId}_b`)?.value;
+  const penRow = document.getElementById(`pen_row_${matchId}`);
+  if (!penRow) return;
+  const isDrawn = a !== '' && b !== '' && Number(a) === Number(b);
+  penRow.style.display = isDrawn ? 'block' : 'none';
+  if (!isDrawn) delete PENDING_PENALTIES[matchId];
+}
+
+function setPenalty(matchId, team) {
+  PENDING_PENALTIES[matchId] = team;
+  const btnA = document.getElementById(`pen_A_${matchId}`);
+  const btnB = document.getElementById(`pen_B_${matchId}`);
+  const stage = FB_STAGES?.find(s => s.matches?.some(m => m.id === matchId));
+  const match = stage?.matches?.find(m => m.id === matchId);
+  if (!match) return;
+  if (btnA) { btnA.style.border = team==='A' ? '2px solid var(--egypt-gold)' : '2px solid rgba(255,255,255,0.2)'; btnA.style.background = team==='A' ? 'rgba(201,168,76,0.2)' : 'transparent'; }
+  if (btnB) { btnB.style.border = team==='B' ? '2px solid var(--egypt-gold)' : '2px solid rgba(255,255,255,0.2)'; btnB.style.background = team==='B' ? 'rgba(201,168,76,0.2)' : 'transparent'; }
+}
+
 async function submitPredictions() {
   let name = CURRENT_PLAYER || document.getElementById('player-name').value.trim();
   if (!name) { showToast('اكتب اسمك', 'error'); return; }
@@ -1134,19 +1497,41 @@ async function submitPredictions() {
     document.getElementById('player-name').disabled = true;
     document.getElementById('name-locked-msg').style.display = 'block';
   }
+  
   const champion = document.getElementById('champion-pick').value;
   if (!champion) { showToast('اختار البطل', 'error'); return; }
+  
+  // ✅ منع تغيير البطل بعد التحديد
+  if (FB_PREDS[name] && FB_PREDS[name].champion && FB_PREDS[name].champion !== champion) {
+    showToast('❌ لا يمكن تغيير توقع البطل بعد حفظه!', 'error');
+    document.getElementById('champion-pick').value = FB_PREDS[name].champion;
+    return;
+  }
+  
   const btn = document.getElementById('save-btn');
   btn.disabled = true;
   btn.innerHTML = '💾 جاري الحفظ... <span class="spinner"></span>';
+  
   if (!FB_PREDS[name]) FB_PREDS[name] = { champion: '', matches: {} };
   FB_PREDS[name].champion = champion;
-  (FB_STAGES || []).forEach(stage => stage.matches.forEach(m => {
-    if (matchStarted(m.date)) return;
-    const a = document.getElementById(`pi_${m.id}_a`)?.value;
-    const b = document.getElementById(`pi_${m.id}_b`)?.value;
-    if (a !== '' && b !== '' && a != null && b != null) FB_PREDS[name].matches[m.id] = `${a}-${b}`;
-  }));
+  
+  (FB_STAGES || []).forEach(stage => {
+    const isKO = isKnockoutStage(stage.id);
+    stage.matches.forEach(m => {
+      if (matchStarted(m.date)) return;
+      const a = document.getElementById(`pi_${m.id}_a`)?.value;
+      const b = document.getElementById(`pi_${m.id}_b`)?.value;
+      if (a !== '' && b !== '' && a != null && b != null) {
+        if (isKO) {
+          const penalty = (Number(a) === Number(b)) ? (PENDING_PENALTIES[m.id] || null) : null;
+          FB_PREDS[name].matches[m.id] = { score: `${a}-${b}`, penalty };
+        } else {
+          FB_PREDS[name].matches[m.id] = `${a}-${b}`;
+        }
+      }
+    });
+  });
+  
   await fbSet('predictions', FB_PREDS);
   await calcScores(true);
   showToast('✅ تم الحفظ! 🎉');
@@ -1180,7 +1565,22 @@ async function saveMatchPrediction(matchId) {
     FB_PREDS[name].champion = champion;
   }
 
-  FB_PREDS[name].matches[matchId] = `${a}-${b}`;
+  // تحديد نوع المرحلة
+  const stage = FB_STAGES?.find(s => s.matches?.some(m => m.id === matchId));
+  const isKO = isKnockoutStage(stage?.id);
+
+  if (isKO) {
+    const isDrawn = Number(a) === Number(b);
+    const penalty = isDrawn ? (PENDING_PENALTIES[matchId] || null) : null;
+    if (isDrawn && !penalty) {
+      showToast('اختار مين هيكسب بضربات الجزاء!', 'error');
+      return;
+    }
+    FB_PREDS[name].matches[matchId] = { score: `${a}-${b}`, penalty };
+  } else {
+    FB_PREDS[name].matches[matchId] = `${a}-${b}`;
+  }
+
   await fbSet('predictions', FB_PREDS);
   await calcScores(true);
   showToast(`✅ تم حفظ توقع المباراة`);
@@ -1222,61 +1622,148 @@ function exportLeaderboard() {
   csvRows.push(['===== الترتيب العام =====']);
   csvRows.push(['اللاعب', 'النقاط الكلية', 'نتائج صحيحة (3 نقاط)', 'فائز+فارق أهداف (2 نقطة)', 'فائز فقط (1 نقطة)', 'توقع البطل', 'البطل الفعلي']);
   
-  players.forEach(name => {
-    const scores = FB_SCORES[name] || { total: 0, exact: 0, winner: 0, goalDiff: 0 };
-    const goalDiffPoints = scores.goalDiff || 0;
-    const winnerOnlyPoints = scores.winner - goalDiffPoints;
-    const championPick = FB_PREDS[name]?.champion || '—';
-    const actualChampion = FB_CHAMP || 'لم يحدد بعد';
-    csvRows.push([name, scores.total, scores.exact, goalDiffPoints, winnerOnlyPoints, championPick, actualChampion]);
-  });
+  // دالة حساب النقاط لكل ماتش (نفس اللي في calcScores بالضبط)
+  function calcMatchPointsForExport(matchId, predRaw, result) {
+    if (!result) return { points: 0, type: 'none' };
+    
+    const match = allMatches.find(m => m.id === matchId);
+    const stageId = match?.stageId;
+    const isKO = isKnockoutStage(stageId);
+    
+    if (!isKO) {
+      // دور المجموعات
+      const pred = typeof predRaw === 'string' ? predRaw : predRaw?.score;
+      if (!pred) return { points: 0, type: 'none' };
+      const [pa, pb] = pred.split('-').map(Number);
+      
+      // 3 نقاط: نتيجة صحيحة بالضبط
+      if (pa === result.a && pb === result.b) {
+        return { points: 3, type: 'exact' };
+      }
+      
+      // 1 نقطة: الفائز صحيح (أو التعادل)
+      const rw = result.a > result.b ? 'A' : result.b > result.a ? 'B' : 'D';
+      const pw = pa > pb ? 'A' : pb > pa ? 'B' : 'D';
+      if (rw === pw) {
+        // 2 نقطة: فائز صحيح + فارق أهداف صحيح
+        const predDiff = pa - pb;
+        const actualDiff = result.a - result.b;
+        if (predDiff === actualDiff && rw !== 'D') {
+          return { points: 2, type: 'winner_diff' };
+        }
+        return { points: 1, type: 'winner' };
+      }
+      return { points: 0, type: 'none' };
+    } else {
+      // دور الإقصاء
+      const pred = typeof predRaw === 'object' ? predRaw : { score: predRaw, penalty: null };
+      if (!pred || !pred.score) return { points: 0, type: 'none' };
+      const pts = calcKOPoints(pred, result);
+      const types = {
+        4: 'exact',
+        3: 'exact',
+        2: 'winner_diff',
+        1: 'winner',
+        0: 'none'
+      };
+      return { points: pts, type: types[pts] || 'none' };
+    }
+  }
+  
+  // بناء بيانات اللاعبين
+  const playerData = [];
+  
+  for (const name of players) {
+    let totalPoints = 0;
+    let exact = 0;
+    let winnerDiff = 0;
+    let winnerOnly = 0;
+    let matchDetails = [];
+    
+    for (const match of allMatches) {
+      const pred = FB_PREDS[name]?.matches?.[match.id];
+      const result = FB_RESULTS[match.id];
+      
+      if (pred && result) {
+        const calc = calcMatchPointsForExport(match.id, pred, result);
+        totalPoints += calc.points;
+        if (calc.type === 'exact') exact++;
+        else if (calc.type === 'winner_diff') winnerDiff++;
+        else if (calc.type === 'winner') winnerOnly++;
+        
+        matchDetails.push({
+          matchId: match.id,
+          teamA: match.teamA,
+          teamB: match.teamB,
+          dateText: match.dateText || '',
+          pred: pred,
+          result: result,
+          points: calc.points,
+          reason: calc.type
+        });
+      }
+    }
+    
+    // بونص البطل
+    let championBonus = 0;
+    if (FB_CHAMP && FB_PREDS[name]?.champion === FB_CHAMP) {
+      championBonus = 5;
+      totalPoints += 5;
+    }
+    
+    playerData.push({
+      name,
+      totalPoints,
+      exact,
+      winnerDiff,
+      winnerOnly,
+      champion: FB_PREDS[name]?.champion || '—',
+      championBonus,
+      matchDetails
+    });
+  }
+  
+  // ترتيب حسب النقاط
+  playerData.sort((a, b) => b.totalPoints - a.totalPoints);
+  
+  for (const p of playerData) {
+    csvRows.push([
+      p.name,
+      p.totalPoints,
+      p.exact,
+      p.winnerDiff,
+      p.winnerOnly,
+      p.champion + (p.championBonus ? ' (+5)' : ''),
+      FB_CHAMP || 'لم يحدد بعد'
+    ]);
+  }
   
   // ========== 2. تفاصيل النقاط لكل لاعب لكل ماتش ==========
   csvRows.push([]);
   csvRows.push(['===== تفاصيل النقاط لكل مباراة =====']);
   csvRows.push(['اللاعب', 'المباراة', 'تاريخ المباراة', 'توقع المستخدم', 'النتيجة النهائية', 'النقاط', 'سبب النقاط']);
   
-  for (let player of players) {
-    const predictions = FB_PREDS[player]?.matches || {};
-    for (let match of allMatches) {
-      const pred = predictions[match.id];
-      if (!pred) continue;
-      const result = FB_RESULTS[match.id];
-      if (!result) continue;
+  for (const p of playerData) {
+    for (const detail of p.matchDetails) {
+      // عرض النتيجة كـ نص عشان ميحولهاش لتواريخ
+      const predStr = typeof detail.pred === 'object' 
+        ? `'${detail.pred.score}${detail.pred.penalty ? ' (جزاء: '+detail.pred.penalty+')' : ''}`
+        : `'${detail.pred}`;
+      const resultStr = `'${detail.result.a} - ${detail.result.b}${detail.result.penalty ? ' (جزاء: '+detail.result.penalty+')' : ''}`;
       
-      const [pa, pb] = pred.split('-').map(Number);
-      let points = 0;
       let reason = '';
-      
-      if (pa === result.a && pb === result.b) {
-        points = 3;
-        reason = 'نتيجة صحيحة 100%';
-      } else {
-        const rw = result.a > result.b ? 'A' : result.b > result.a ? 'B' : 'D';
-        const pw = pa > pb ? 'A' : pb > pa ? 'B' : 'D';
-        if (rw === pw) {
-          const predDiff = pa - pb;
-          const actualDiff = result.a - result.b;
-          if (predDiff === actualDiff) {
-            points = 2;
-            reason = 'فائز صحيح + فارق أهداف صحيح';
-          } else {
-            points = 1;
-            reason = 'فائز صحيح فقط';
-          }
-        } else {
-          points = 0;
-          reason = 'توقع خاطئ';
-        }
-      }
+      if (detail.reason === 'exact') reason = 'نتيجة صحيحة 100%';
+      else if (detail.reason === 'winner_diff') reason = 'فائز صحيح + فارق أهداف صحيح';
+      else if (detail.reason === 'winner') reason = 'فائز صحيح فقط';
+      else reason = 'توقع خاطئ';
       
       csvRows.push([
-        player,
-        `${match.teamA} vs ${match.teamB}`,
-        match.dateText || '',
-        `${pa} - ${pb}`,
-        `${result.a} - ${result.b}`,
-        points,
+        p.name,
+        `${detail.teamA} vs ${detail.teamB}`,
+        detail.dateText,
+        predStr,
+        resultStr,
+        detail.points,
         reason
       ]);
     }
@@ -1286,9 +1773,9 @@ function exportLeaderboard() {
   csvRows.push([]);
   csvRows.push(['===== توقعات البطل =====']);
   csvRows.push(['اللاعب', 'توقع البطل']);
-  players.forEach(name => {
-    csvRows.push([name, FB_PREDS[name]?.champion || '—']);
-  });
+  for (const p of playerData) {
+    csvRows.push([p.name, p.champion]);
+  }
   
   // تحويل المصفوفة إلى CSV
   const csvContent = csvRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
@@ -1303,33 +1790,38 @@ function exportLeaderboard() {
 // Scoring
 async function calcScores(silent = false) {
   const all = getAllMatches();
+  // بناء map: matchId -> stageId
+  const matchStageMap = {};
+  (FB_STAGES || []).forEach(s => s.matches.forEach(m => { matchStageMap[m.id] = s.id; }));
+
   for (const [n, p] of Object.entries(FB_PREDS)) {
     let t = 0, e = 0, w = 0;
     all.forEach(m => {
       const r = FB_RESULTS[m.id];
       if (!r) return;
-      const pred = p.matches?.[m.id];
-      if (!pred) return;
-      const [pa, pb] = pred.split('-').map(Number);
-      if (pa === r.a && pb === r.b) { t += 3; e++; }
-      else {
-        const rw = r.a > r.b ? 'A' : r.b > r.a ? 'B' : 'D';
-        const pw = pa > pb ? 'A' : pb > pa ? 'B' : 'D';
-        if (rw === pw) {
-  // لو النتيجتين متساويتين (تعادل) -> نقطة واحدة فقط
-  if (r.a === r.b && pa === pb) {
-    t += 1; // التعادل نقطة واحدة
-  } else {
-    const predDiff = pa - pb;
-    const actualDiff = r.a - r.b;
-    if (predDiff === actualDiff) {
-      t += 2;
-    } else {
-      t += 1;
-    }
-  }
-  w++;
-}
+      const rawPred = p.matches?.[m.id];
+      if (!rawPred) return;
+
+      const stageId = matchStageMap[m.id];
+      const isKO = isKnockoutStage(stageId);
+
+      if (!isKO) {
+        // دور المجموعات - النظام القديم
+        const pred = typeof rawPred === 'string' ? rawPred : rawPred.score;
+        const [pa, pb] = pred.split('-').map(Number);
+        if (pa === r.a && pb === r.b) { t += 3; e++; }
+        else {
+          const rw = r.a > r.b ? 'A' : r.b > r.a ? 'B' : 'D';
+          const pw = pa > pb ? 'A' : pb > pa ? 'B' : 'D';
+          if (rw === pw) { t += 1; w++; }
+        }
+      } else {
+        // دور الإقصاء - النظام الجديد
+        const pred = typeof rawPred === 'object' ? rawPred : { score: rawPred, penalty: null };
+        const pts = calcKOPoints(pred, r);
+        t += pts;
+        if (pts === 3) e++;
+        else if (pts >= 1) w++;
       }
     });
     if (FB_CHAMP && p.champion === FB_CHAMP) t += 5;
@@ -1368,13 +1860,15 @@ function switchAdminStage(i) {
 function renderAdminResults(si) {
   const stage = FB_STAGES?.[si];
   if (!stage) { document.getElementById('admin-results-container').innerHTML = ''; return; }
+  const isKO = isKnockoutStage(stage.id);
   
-  // ترتيب الماتشات حسب التاريخ تصاعدياً
   const sortedMatches = [...stage.matches].sort((a, b) => new Date(a.date) - new Date(b.date));
   
   let html = '';
   sortedMatches.forEach(m => {
     const res = FB_RESULTS[m.id];
+    const hasPenalty = isKO; // في النوك آوت ممكن يكون في جزاء
+
     html += `<div class="match-card" style="margin-bottom:8px;">
       <div class="match-info" style="display:flex;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;">
         <span><strong>${m.teamA}</strong> vs <strong>${m.teamB}</strong></span>
@@ -1385,8 +1879,21 @@ function renderAdminResults(si) {
         <span style="color:var(--egypt-gold);font-weight:900;">-</span>
         <input type="number" class="score-input" id="ri_${m.id}_b" min="0" max="30" placeholder="—" value="${res?.b !== undefined ? res.b : ''}" style="margin:0;">
         <button onclick="saveOneResult('${m.id}')" style="background:var(--egypt-gold);color:#1a1a1a;border:none;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;">💾 حفظ</button>
-      </div>
-    </div>`;
+      </div>`;
+
+    if (hasPenalty) {
+      const curPen = res?.penalty || '';
+      html += `<div style="margin-top:10px;padding:8px;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:10px;">
+        <div style="font-size:12px;color:var(--egypt-gray);margin-bottom:6px;">⚽ الفائز بضربات الجزاء (اتركه فاضي لو ماكانش في جزاء)</div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="setAdminPenalty('${m.id}','A')" id="adpen_A_${m.id}" style="flex:1;padding:6px;border-radius:8px;border:2px solid ${curPen==='A'?'var(--egypt-gold)':'rgba(255,255,255,0.2)'};background:${curPen==='A'?'rgba(201,168,76,0.2)':'transparent'};color:white;font-family:'Cairo',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">${m.teamA}</button>
+          <button onclick="setAdminPenalty('${m.id}','none')" id="adpen_N_${m.id}" style="padding:6px 10px;border-radius:8px;border:2px solid ${!curPen?'var(--egypt-gold)':'rgba(255,255,255,0.2)'};background:${!curPen?'rgba(201,168,76,0.2)':'transparent'};color:white;font-family:'Cairo',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">لا جزاء</button>
+          <button onclick="setAdminPenalty('${m.id}','B')" id="adpen_B_${m.id}" style="flex:1;padding:6px;border-radius:8px;border:2px solid ${curPen==='B'?'var(--egypt-gold)':'rgba(255,255,255,0.2)'};background:${curPen==='B'?'rgba(201,168,76,0.2)':'transparent'};color:white;font-family:'Cairo',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">${m.teamB}</button>
+        </div>
+      </div>`;
+    }
+
+    html += `</div>`;
   });
   
   html += `<div class="sec-label">🏆 البطل الفعلي</div>
@@ -1398,11 +1905,35 @@ function renderAdminResults(si) {
   
   document.getElementById('admin-results-container').innerHTML = html;
 }
+
+const ADMIN_PENALTIES = {};
+function setAdminPenalty(matchId, team) {
+  ADMIN_PENALTIES[matchId] = team === 'none' ? null : team;
+  ['A','B','N'].forEach(t => {
+    const btn = document.getElementById(`adpen_${t}_${matchId}`);
+    if (!btn) return;
+    const isActive = (team === 'none' && t === 'N') || (team !== 'none' && t === team);
+    btn.style.border = isActive ? '2px solid var(--egypt-gold)' : '2px solid rgba(255,255,255,0.2)';
+    btn.style.background = isActive ? 'rgba(201,168,76,0.2)' : 'transparent';
+  });
+}
 async function saveOneResult(mid) {
   const a = document.getElementById(`ri_${mid}_a`)?.value;
   const b = document.getElementById(`ri_${mid}_b`)?.value;
   if (a === '' || b === '') { showToast('أدخل النتيجة', 'error'); return; }
-  FB_RESULTS[mid] = { a: parseInt(a), b: parseInt(b) };
+  
+  const stage = FB_STAGES?.find(s => s.matches?.some(m => m.id === mid));
+  const isKO = isKnockoutStage(stage?.id);
+  const isDrawn = Number(a) === Number(b);
+  
+  if (isKO && isDrawn) {
+    const penalty = ADMIN_PENALTIES.hasOwnProperty(mid) ? ADMIN_PENALTIES[mid] : (FB_RESULTS[mid]?.penalty || null);
+    if (!penalty) { showToast('اختار الفائز بضربات الجزاء!', 'error'); return; }
+    FB_RESULTS[mid] = { a: parseInt(a), b: parseInt(b), penalty };
+  } else {
+    FB_RESULTS[mid] = { a: parseInt(a), b: parseInt(b), penalty: null };
+  }
+  
   await fbSet('results', FB_RESULTS);
   showToast('✅ تم حفظ النتيجة!');
   await calcScores(true);
@@ -1567,6 +2098,185 @@ function updateSyncDot(connected) {
   }
 }
 
+// ==================== BRACKET - TREE VIEW ====================
+function renderBracket() {
+  const container = document.getElementById('bracket-container');
+  if (!container) return;
+
+  const knockoutStageOrder = ['round_of_32','round_of_16','quarter_final','semi_final','final'];
+  const knockoutStages = (FB_STAGES || []).filter(s => knockoutStageOrder.includes(s.id));
+
+  if (!knockoutStages.length) {
+    container.innerHTML = '<div class="empty" style="padding:40px;">⏳ الأدوار الإقصائية لم تبدأ بعد — انتظر انتهاء دور المجموعات</div>';
+    return;
+  }
+
+  // دالة استخراج العلم
+  function extractFlag(teamName) {
+    const flagMatch = teamName.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g);
+    if (flagMatch && flagMatch.length > 0) {
+      return flagMatch[flagMatch.length - 1];
+    }
+    return '🏳️';
+  }
+
+  function extractName(teamName) {
+    return teamName.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '').trim();
+  }
+
+  const orderedStages = knockoutStageOrder.map(id => knockoutStages.find(s => s.id === id)).filter(Boolean);
+  const reversedStages = [...orderedStages].reverse();
+  
+  let html = `<div style="display:flex;flex-direction:column;align-items:center;padding:20px 10px;overflow-x:auto;min-width:100%;">`;
+  
+  reversedStages.forEach((stage, stageIdx) => {
+    const isFinal = stage.id === 'final';
+    const isSemi = stage.id === 'semi_final';
+    const isQuarter = stage.id === 'quarter_final';
+    const isR16 = stage.id === 'round_of_16';
+    const isR32 = stage.id === 'round_of_32';
+    
+    const sortedMatches = [...stage.matches].sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    const stageLabel = isFinal ? '🏆 النهائي' : 
+                       isSemi ? '🌟 نصف النهائي' : 
+                       isQuarter ? '🔴 ربع النهائي' : 
+                       isR16 ? '🟠 دور الـ١٦' : 
+                       '🔵 دور الـ٣٢';
+    
+    const cardWidth = Math.min(180, Math.max(120, 90 / Math.max(sortedMatches.length, 1) * 2));
+    
+    html += `<div style="display:flex;flex-direction:column;align-items:center;width:100%;margin-bottom:${isFinal ? '0' : '16px'};">`;
+    
+    html += `<div style="font-size:14px;font-weight:800;color:var(--egypt-gold);margin-bottom:10px;text-align:center;background:rgba(0,0,0,0.3);padding:4px 16px;border-radius:20px;border:1px solid rgba(201,168,76,0.3);">${stageLabel}</div>`;
+    
+    html += `<div style="display:flex;justify-content:center;align-items:stretch;gap:8px;width:100%;position:relative;padding:4px 0;">`;
+    
+    sortedMatches.forEach((m, mi) => {
+      const res = FB_RESULTS[m.id];
+      const started = matchStarted(m.date);
+      const isLive = started && !res;
+      
+      // استخراج العلم والاسم
+      const flagA = extractFlag(m.teamA);
+      const flagB = extractFlag(m.teamB);
+      const nameA = extractName(m.teamA);
+      const nameB = extractName(m.teamB);
+      
+      let winnerA = false, winnerB = false;
+      if (res) {
+        winnerA = res.a > res.b || (res.a === res.b && res.penalty === 'A');
+        winnerB = res.b > res.a || (res.a === res.b && res.penalty === 'B');
+      }
+      
+      let scoreDisplay = '';
+      if (res) {
+        const penStr = res.penalty ? ` (جزاء)` : '';
+        scoreDisplay = `<div style="font-size:15px;font-weight:900;color:var(--egypt-gold);padding:2px 6px;background:rgba(0,0,0,0.3);border-radius:6px;">${res.a} - ${res.b}${penStr}</div>`;
+      } else if (isLive) {
+        scoreDisplay = `<div style="font-size:11px;color:#ff4136;font-weight:700;">🔴 جارية</div>`;
+      } else {
+        const dateParts = m.dateText ? m.dateText.split('·') : ['', ''];
+        scoreDisplay = `<div style="font-size:9px;color:var(--egypt-gray);">${dateParts[0] || ''}</div>`;
+      }
+      
+      const borderColor = res ? 'rgba(46,204,64,0.6)' : isLive ? 'rgba(255,65,54,0.6)' : 'rgba(196,30,30,0.3)';
+      const isEgypt = m.teamA.includes('مصر') || m.teamB.includes('مصر');
+      
+      html += `<div style="display:flex;flex-direction:column;align-items:center;flex:1;min-width:${cardWidth}px;max-width:${cardWidth + 20}px;">`;
+      
+      if (!isR32) {
+        const lineHeight = stageIdx < reversedStages.length - 1 ? '20px' : '0px';
+        html += `<div style="width:2px;height:${lineHeight};background:linear-gradient(to bottom, var(--egypt-gold), rgba(201,168,76,0.3));margin-bottom:4px;"></div>`;
+      }
+      
+      html += `<div style="background:rgba(30,30,30,0.9);border-radius:10px;padding:6px 8px;border:2px solid ${isEgypt ? 'var(--egypt-gold)' : borderColor};${isEgypt ? 'box-shadow:0 0 15px rgba(201,168,76,0.4);' : ''}width:100%;text-align:center;transition:all 0.3s;">`;
+      
+      // الفريق A مع العلم
+      html += `<div style="font-size:11px;font-weight:700;${winnerA ? 'color:var(--egypt-gold);' : 'color:rgba(255,255,255,0.8);'}">${flagA} ${nameA}</div>`;
+      
+      html += `<div style="margin:2px 0;">${scoreDisplay}</div>`;
+      
+      // الفريق B مع العلم
+      html += `<div style="font-size:11px;font-weight:700;${winnerB ? 'color:var(--egypt-gold);' : 'color:rgba(255,255,255,0.8);'}">${flagB} ${nameB}</div>`;
+      
+      if (!res && !isLive && (isR32 || isR16)) {
+        html += `<div style="font-size:8px;color:var(--egypt-gray);margin-top:2px;">#${mi+1}</div>`;
+      }
+      
+      html += `</div>`;
+      
+      if (!isFinal) {
+        const lineHeight = stageIdx > 0 ? '20px' : '0px';
+        html += `<div style="width:2px;height:${lineHeight};background:linear-gradient(to top, var(--egypt-gold), rgba(201,168,76,0.3));margin-top:4px;"></div>`;
+      }
+      
+      html += `</div>`;
+    });
+    
+    html += `</div>`;
+    
+    if (!isR32 && sortedMatches.length > 1) {
+      html += `<div style="display:flex;justify-content:center;width:100%;padding:0 10px;margin:4px 0;">
+        <div style="display:flex;justify-content:space-between;width:${Math.min(100, sortedMatches.length * 20 + 20)}%;">
+          ${Array.from({length: Math.floor(sortedMatches.length/2)}, (_, i) => `
+            <div style="display:flex;align-items:center;gap:4px;flex:1;">
+              <div style="height:2px;flex:1;background:var(--egypt-gold);"></div>
+              <div style="width:2px;height:12px;background:var(--egypt-gold);"></div>
+              <div style="height:2px;flex:1;background:var(--egypt-gold);"></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    }
+    
+    html += `</div>`;
+    
+    if (stageIdx < reversedStages.length - 1) {
+      html += `<div style="display:flex;justify-content:center;width:100%;padding:2px 0;">
+        <div style="width:60%;height:2px;background:linear-gradient(90deg,transparent,var(--egypt-gold),transparent);"></div>
+      </div>`;
+    }
+  });
+  
+  html += `</div>`;
+  
+  // أرشيف دور المجموعات
+  const groupStage = (FB_STAGES || []).find(s => s.id === 'group_stage');
+  if (groupStage) {
+    const finishedGs = groupStage.matches.filter(m => FB_RESULTS[m.id]);
+    if (finishedGs.length) {
+      html += `<div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;width:100%;">
+        <div style="font-size:13px;font-weight:800;color:var(--egypt-gray);margin-bottom:12px;text-align:center;">📦 أرشيف دور المجموعات</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">`;
+
+      const groups = {};
+      finishedGs.forEach(m => { const g = m.group || '—'; (groups[g] = groups[g] || []).push(m); });
+      Object.entries(groups).forEach(([g, ms]) => {
+        html += `<div style="background:rgba(20,20,20,0.6);border-radius:8px;padding:6px 10px;min-width:120px;border:1px solid rgba(255,255,255,0.05);">
+          <div style="font-size:10px;font-weight:800;color:var(--egypt-gray);margin-bottom:4px;text-align:center;">المجموعة ${g}</div>`;
+        ms.slice(0, 4).forEach(m => {
+          const res = FB_RESULTS[m.id];
+          const flagA = extractFlag(m.teamA);
+          const flagB = extractFlag(m.teamB);
+          const nameA = extractName(m.teamA);
+          const nameB = extractName(m.teamB);
+          html += `<div style="font-size:9px;display:flex;justify-content:space-between;padding:1px 4px;border-bottom:1px solid rgba(255,255,255,0.05);">
+            <span style="color:rgba(255,255,255,0.5);">${flagA} ${nameA}</span>
+            <span style="font-weight:700;color:var(--egypt-gray);">${res.a}-${res.b}</span>
+            <span style="color:rgba(255,255,255,0.5);">${flagB} ${nameB}</span>
+          </div>`;
+        });
+        html += `</div>`;
+      });
+      html += `</div></div>`;
+    }
+  }
+
+  container.innerHTML = html || '<div class="empty">لا توجد بيانات</div>';
+}
+// ==================== END BRACKET ====================
+
 // Initialize app
 async function initApp() {
   const saved = localStorage.getItem('worldcup_player');
@@ -1668,6 +2378,11 @@ window.saveMatchPrediction = saveMatchPrediction;
 window.deletePlayer = deletePlayer;
 window.loadDailyPredictions = loadDailyPredictions;
 window.fetchLiveResultsFromAPI = fetchLiveResultsFromAPI;
+window.renderBracket = renderBracket;
+window.toggleArchive = toggleArchive;
+window.onScoreInput = onScoreInput;
+window.setPenalty = setPenalty;
+window.setAdminPenalty = setAdminPenalty;
 </script>
 
 </body>
