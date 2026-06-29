@@ -694,7 +694,7 @@ const GROUP_STAGE_MATCHES = [
   {id:"gs_57", teamA:"اليابان 🇯🇵", teamB:"السويد 🇸🇪", date:"2026-06-26T02:00:00", group:"F"},
   {id:"gs_58", teamA:"تونس 🇹🇳", teamB:"هولندا 🇳🇱", date:"2026-06-26T02:00:00", group:"F"},
   {id:"gs_16", teamA:"بلجيكا 🇧🇪", teamB:"مصر 🇪🇬", date:"2026-06-15T22:00:00", group:"G"},
-  {id:"gs_15", teamA:"إيرلندا 🇮🇪", teamB:"نيوزيلندا 🇳🇿", date:"2026-06-16T04:00:00", group:"G"},
+  {id:"gs_15", teamA:"إيران 🇮🇷", teamB:"نيوزيلندا 🇳🇿", date:"2026-06-16T04:00:00", group:"G"},
   {id:"gs_39", teamA:"بلجيكا 🇧🇪", teamB:"إيران 🇮🇷", date:"2026-06-21T22:00:00", group:"G"},
   {id:"gs_40", teamA:"نيوزيلندا 🇳🇿", teamB:"مصر 🇪🇬", date:"2026-06-22T04:00:00", group:"G"},
   {id:"gs_63", teamA:"مصر 🇪🇬", teamB:"إيران 🇮🇷", date:"2026-06-27T06:00:00", group:"G"},
@@ -1364,7 +1364,7 @@ function getKnockoutNote(m, pred, res) {
   const isKO = isKnockoutStage(FB_STAGES?.find(s => s.matches?.some(x => x.id === m.id))?.id);
 
   if (!isKO) {
-    // دور المجموعات
+    // ✅ دور المجموعات - استخدم pred.score مباشرة
     const [pa, pb] = pred.score.split('-').map(Number);
     if (pa === res.a && pb === res.b) return '<div style="background:#1a5c2e;padding:4px 8px;border-radius:12px;margin-top:6px;text-align:center;"><span style="color:#80f0a0;">🎯 نتيجة صح بالكامل! +٣ نقاط</span></div>';
     const rw = res.a > res.b ? 'A' : res.b > res.a ? 'B' : 'D';
@@ -1373,27 +1373,30 @@ function getKnockoutNote(m, pred, res) {
     return '<div style="background:#5c1a1a;padding:4px 8px;border-radius:12px;margin-top:6px;text-align:center;"><span style="color:#ff9090;">❌ توقع خاطئ! ٠ نقطة</span></div>';
   }
 
-  // دور الإقصاء
+  // ✅ دور الإقصاء - استخدم calcKOPoints اللي عدلتها
   const pts = calcKOPoints(pred, res);
   const [pa, pb] = pred.score.split('-').map(Number);
   const predScoreStr = `${pa}-${pb}${pred.penalty ? ' ('+pred.penalty+' بالجزاء)' : ''}`;
   const resScoreStr = `${res.a}-${res.b}${res.penalty ? ' ('+res.penalty+' بالجزاء)' : ''}`;
+  
   const colors = { 
-  4: ['#4a3800','#ffd700','🏆'], 
-  3: ['#1a5c2e','#80f0a0','🎯'], 
-  2: ['#1a3a5c','#a0c0ff','⚡'],   // ← لون أزرق بدل بنفسجي
-  1: ['#3a1a5c','#d7a8f0','✅'],   // ← لون بنفسجي بدل أزرق
-  0: ['#5c1a1a','#ff9090','❌'] 
-};
-const labels = { 
-  4: `🏆 توقعك صح بالكامل! (تعادل + جزاء) +٤ نقاط`, 
-  3: `🎯 نتيجة صح بالكامل! +٣ نقاط`, 
-  2: `⚡ فائز صح + فرق أهداف صح! +٢ نقطة`,   // ← التعديل هنا
-  1: `✅ عرفت مين عدى (غلط في فرق الأهداف)! +١ نقطة`, 
-  0: `❌ توقع خاطئ! ٠ نقطة` 
-};
+    4: ['#4a3800','#ffd700','🏆'], 
+    3: ['#1a5c2e','#80f0a0','🎯'], 
+    2: ['#1a3a5c','#a0c0ff','⚡'],   // ← أزرق
+    1: ['#3a1a5c','#d7a8f0','✅'],   // ← بنفسجي
+    0: ['#5c1a1a','#ff9090','❌'] 
+  };
+  const labels = { 
+    4: `🏆 توقعك صح بالكامل! (تعادل + جزاء) +٤ نقاط`, 
+    3: `🎯 نتيجة صح بالكامل! +٣ نقاط`, 
+    2: `⚡ فائز صح + فرق أهداف صح! +٢ نقطة`,   // ← التعديل الجديد
+    1: `✅ عرفت مين عدى (غلط في فرق الأهداف)! +١ نقطة`, 
+    0: `❌ توقع خاطئ! ٠ نقطة` 
+  };
+  const [bg, col, icon] = colors[pts] || colors[0];
+  
   return `<div style="background:${bg};padding:6px 8px;border-radius:12px;margin-top:6px;text-align:center;">
-    <span style="color:${col};font-size:12px;">${labels[pts]}</span><br>
+    <span style="color:${col};font-size:12px;">${labels[pts] || labels[0]}</span><br>
     <span style="font-size:11px;color:rgba(255,255,255,0.6);">توقعك: ${predScoreStr} | النتيجة: ${resScoreStr}</span>
   </div>`;
 }
