@@ -581,6 +581,18 @@ header h1 {
       <div class="form-group"><label>كلمة سر جديدة</label><input type="text" id="new-pass" placeholder="اتركها فاضية"></div>
       <button class="btn secondary" onclick="changePass()" style="margin-bottom:8px"><i class="fas fa-key"></i> تغيير كلمة السر</button>
       <button class="btn danger" onclick="resetAll()"><i class="fas fa-trash-alt"></i> مسح كل البيانات</button>
+      <div class="sec-label"><i class="fas fa-plus-minus"></i> تعديل نقاط يدوي</div>
+      <div style="margin-bottom:16px;display:flex;flex-direction:column;gap:8px;">
+        <select id="adjust-player" style="width:100%;background:#2a2a2a;border:1px solid var(--egypt-gold);border-radius:8px;padding:10px;">
+          <option value="">— اختار اللاعب —</option>
+        </select>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="number" id="adjust-points" placeholder="عدد النقاط (سالب للحذف)" style="flex:1;background:#2a2a2a;border:1px solid var(--egypt-gold);border-radius:8px;padding:10px;color:white;font-family:'Cairo',sans-serif;font-size:14px;">
+        </div>
+        <input type="text" id="adjust-reason" placeholder="السبب (اختياري)" style="background:#2a2a2a;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:10px;color:white;font-family:'Cairo',sans-serif;font-size:13px;">
+        <button class="btn" onclick="adjustPlayerPoints()"><i class="fas fa-edit"></i> تطبيق التعديل</button>
+        <div id="adjust-log" style="font-size:11px;color:var(--egypt-gray);max-height:100px;overflow-y:auto;"></div>
+      </div>
       <div class="sec-label"><i class="fas fa-user-slash"></i> حذف لاعب</div>
       <div id="delete-player-section" style="margin-bottom:16px;">
         <select id="player-to-delete" style="width:100%;background:#2a2a2a;border:1px solid var(--egypt-gold);border-radius:8px;padding:10px;margin-bottom:8px;">
@@ -836,23 +848,45 @@ function getMatchWinner(matchId) {
 }
 
 function propagateWinners() {
-  // تحديث أسماء الفرق في المراحل التالية بناءً على الفائزين
-  const stageOrder = ['round_of_32','round_of_16','quarter_final','semi_final','final'];
-  for (let si = 0; si < stageOrder.length - 1; si++) {
-    const curStage  = FB_STAGES?.find(s => s.id === stageOrder[si]);
-    const nextStage = FB_STAGES?.find(s => s.id === stageOrder[si + 1]);
-    if (!curStage || !nextStage) continue;
-    const sortedCur = [...curStage.matches].sort((a, b) => new Date(a.date) - new Date(b.date));
-    sortedCur.forEach((m, idx) => {
+  // الفائزين: يروحوا للمرحلة التالية
+  const winnerPath = ['round_of_32','round_of_16','quarter_final','semi_final','final'];
+  for (let si = 0; si < winnerPath.length - 1; si++) {
+    const cur  = FB_STAGES?.find(s => s.id === winnerPath[si]);
+    const next = FB_STAGES?.find(s => s.id === winnerPath[si + 1]);
+    if (!cur || !next) continue;
+    const sorted = [...cur.matches].sort((a,b) => new Date(a.date)-new Date(b.date));
+    sorted.forEach((m, idx) => {
       const winner = getMatchWinner(m.id);
       if (!winner) return;
-      const nextMatchIdx = Math.floor(idx / 2);
-      const nextMatch = nextStage.matches[nextMatchIdx];
-      if (!nextMatch) return;
-      if (idx % 2 === 0) nextMatch.teamA = winner;
-      else               nextMatch.teamB = winner;
+      const nm = next.matches[Math.floor(idx/2)];
+      if (!nm) return;
+      if (idx % 2 === 0) nm.teamA = winner;
+      else               nm.teamB = winner;
     });
   }
+
+  // الخاسرين في نصف النهائي → مباراة الثالث والرابع
+  const semi  = FB_STAGES?.find(s => s.id === 'semi_final');
+  const third = FB_STAGES?.find(s => s.id === 'third_place');
+  if (semi && third && third.matches[0]) {
+    const sorted = [...semi.matches].sort((a,b) => new Date(a.date)-new Date(b.date));
+    sorted.forEach((m, idx) => {
+      const loser = getMatchLoser(m.id);
+      if (!loser) return;
+      if (idx === 0) third.matches[0].teamA = loser;
+      else           third.matches[0].teamB = loser;
+    });
+  }
+}
+
+function getMatchLoser(matchId) {
+  const res = FB_RESULTS[matchId];
+  if (!res) return null;
+  const match = getAllMatches().find(m => m.id === matchId);
+  if (!match) return null;
+  if (res.a > res.b || (res.a === res.b && res.penalty === 'A')) return match.teamB;
+  if (res.b > res.a || (res.a === res.b && res.penalty === 'B')) return match.teamA;
+  return null;
 }
 
 function autoGenerateKnockoutStages() {
@@ -896,6 +930,16 @@ function autoGenerateKnockoutStages() {
     });
     added = true;
   }
+  if (!existingIds.includes('third_place')) {
+    FB_STAGES.push({
+      id: 'third_place', label: 'مباراة الثالث والرابع',
+      matches: [{
+        id:'third_1', teamA:'سيُحدد', teamB:'سيُحدد',
+        date: new Date('2026-07-18T22:00:00').toISOString(), dateText:'قريباً'
+      }]
+    });
+    added = true;
+  }
   if (!existingIds.includes('final')) {
     FB_STAGES.push({
       id: 'final', label: 'النهائي',
@@ -907,7 +951,7 @@ function autoGenerateKnockoutStages() {
     added = true;
   }
 
-  // دايماً نتحقق من تحديث الفائزين
+  // دايماً نتحقق من تحديث الفائزين والخاسرين
   propagateWinners();
 
   if (added) {
@@ -1769,11 +1813,24 @@ function renderAdminPanel() {
   const nav = document.getElementById('admin-stages-nav');
   nav.innerHTML = FB_STAGES.map((s, i) => `<button class="inner-tab ${i === adminCurrentStage ? 'active' : ''}" onclick="switchAdminStage(${i})">${s.label}</button>`).join('');
   renderAdminResults(adminCurrentStage);
-  const playerSelect = document.getElementById('player-to-delete');
-  if (playerSelect) {
-    const players = Object.keys(FB_PREDS);
-    playerSelect.innerHTML = '<option value="">— اختار اللاعب —</option>' + players.map(p => `<option value="${p}">${p}</option>`).join('');
-  }
+  const players = Object.keys(FB_PREDS);
+  const opts = '<option value="">— اختار اللاعب —</option>' + players.map(p => `<option value="${p}">${p}</option>`).join('');
+  const delSel = document.getElementById('player-to-delete');
+  const adjSel = document.getElementById('adjust-player');
+  if (delSel) delSel.innerHTML = opts;
+  if (adjSel) adjSel.innerHTML = opts;
+  renderAdjustLog();
+}
+
+function renderAdjustLog() {
+  const log = FB_SCORES.__adjustLog__ || [];
+  const el = document.getElementById('adjust-log');
+  if (!el || !log.length) return;
+  el.innerHTML = log.slice(-5).reverse().map(e =>
+    `<div style="padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+      ${e.player}: ${e.pts > 0 ? '+' : ''}${e.pts} نقطة ${e.reason ? '— ' + e.reason : ''} <span style="color:rgba(255,255,255,0.3);">(${e.date})</span>
+    </div>`
+  ).join('');
 }
 function switchAdminStage(i) {
   adminCurrentStage = i;
@@ -2063,7 +2120,7 @@ function renderBracket() {
   const container = document.getElementById('bracket-container');
   if (!container) return;
 
-  const stageOrder = ['round_of_32','round_of_16','quarter_final','semi_final','final'];
+  const stageOrder = ['round_of_32','round_of_16','quarter_final','semi_final','third_place','final'];
   const stages = stageOrder.map(id => (FB_STAGES||[]).find(s => s.id === id)).filter(Boolean);
 
   if (!stages.length) {
@@ -2073,7 +2130,8 @@ function renderBracket() {
 
   const stageLabels = {
     round_of_32:'🔵 دور الـ٣٢', round_of_16:'🟠 دور الـ١٦',
-    quarter_final:'🔴 ربع النهائي', semi_final:'🌟 نصف النهائي', final:'🏆 النهائي'
+    quarter_final:'🔴 ربع النهائي', semi_final:'🌟 نصف النهائي',
+    third_place:'🥉 مباراة الثالث والرابع', final:'🏆 النهائي'
   };
 
   let html = '<div style="display:flex;flex-direction:column;gap:16px;">';
@@ -2176,6 +2234,33 @@ function toggleArchive() {
 }
 // ==================== END BRACKET ====================
 
+async function adjustPlayerPoints() {
+  const player = document.getElementById('adjust-player').value;
+  const pts = parseInt(document.getElementById('adjust-points').value);
+  const reason = document.getElementById('adjust-reason').value.trim();
+
+  if (!player) { showToast('اختار اللاعب', 'error'); return; }
+  if (isNaN(pts) || pts === 0) { showToast('اكتب عدد النقاط (ممكن يكون سالب)', 'error'); return; }
+
+  if (!FB_SCORES[player]) FB_SCORES[player] = { total: 0, exact: 0, winner: 0 };
+  FB_SCORES[player].total = (FB_SCORES[player].total || 0) + pts;
+  FB_SCORES[player].manual = (FB_SCORES[player].manual || 0) + pts;
+
+  // سجل التعديلات
+  if (!FB_SCORES.__adjustLog__) FB_SCORES.__adjustLog__ = [];
+  FB_SCORES.__adjustLog__.push({
+    player, pts, reason,
+    date: new Date().toLocaleDateString('ar-EG')
+  });
+
+  await fbSet('scores', FB_SCORES);
+  showToast(`✅ ${pts > 0 ? '+' : ''}${pts} نقطة لـ ${player}`);
+  document.getElementById('adjust-points').value = '';
+  document.getElementById('adjust-reason').value = '';
+  renderLeaderboard();
+  renderAdjustLog();
+}
+
 async function resetStagesOnly() {
   if (!confirm('⚠️ ده هيمسح الأدوار من Firebase ويحطها من الكود — النتائج والتوقعات مش هتتأثر. متأكد؟')) return;
 
@@ -2201,6 +2286,9 @@ async function resetStagesOnly() {
   });
   FB_STAGES.push({ id: 'semi_final', label: 'نصف النهائي',
     matches: Array.from({length:2}, (_,i) => ({ id:`sf_${i+1}`, teamA:'سيُحدد', teamB:'سيُحدد', date: new Date('2026-07-14T18:00:00').toISOString(), dateText:'قريباً' }))
+  });
+  FB_STAGES.push({ id: 'third_place', label: 'مباراة الثالث والرابع',
+    matches: [{ id:'third_1', teamA:'سيُحدد', teamB:'سيُحدد', date: new Date('2026-07-18T22:00:00').toISOString(), dateText:'قريباً' }]
   });
   FB_STAGES.push({ id: 'final', label: 'النهائي',
     matches: [{ id:'final_1', teamA:'سيُحدد', teamB:'سيُحدد', date: new Date('2026-07-19T22:00:00').toISOString(), dateText:'قريباً' }]
@@ -2325,6 +2413,7 @@ window.deletePlayer = deletePlayer;
 window.loadDailyPredictions = loadDailyPredictions;
 window.fetchLiveResultsFromAPI = fetchLiveResultsFromAPI;
 window.renderBracket = renderBracket;
+window.adjustPlayerPoints = adjustPlayerPoints;
 window.resetStagesOnly = resetStagesOnly;
 window.toggleArchive = toggleArchive;
 window.onScoreInput = onScoreInput;
