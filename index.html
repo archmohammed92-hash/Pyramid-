@@ -581,17 +581,15 @@ header h1 {
       <div class="form-group"><label>كلمة سر جديدة</label><input type="text" id="new-pass" placeholder="اتركها فاضية"></div>
       <button class="btn secondary" onclick="changePass()" style="margin-bottom:8px"><i class="fas fa-key"></i> تغيير كلمة السر</button>
       <button class="btn danger" onclick="resetAll()"><i class="fas fa-trash-alt"></i> مسح كل البيانات</button>
-      <div class="sec-label"><i class="fas fa-plus-minus"></i> تعديل نقاط يدوي</div>
-      <div style="margin-bottom:16px;display:flex;flex-direction:column;gap:8px;">
-        <select id="adjust-player" style="width:100%;background:#2a2a2a;border:1px solid var(--egypt-gold);border-radius:8px;padding:10px;">
+      <div class="sec-label"><i class="fas fa-balance-scale"></i> تعديل نقاط يدوي</div>
+      <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:14px;margin-bottom:16px;display:flex;flex-direction:column;gap:10px;">
+        <select id="adjust-player" style="width:100%;background:#2a2a2a;border:1px solid var(--egypt-gold);border-radius:8px;padding:10px;color:white;font-family:'Cairo',sans-serif;">
           <option value="">— اختار اللاعب —</option>
         </select>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input type="number" id="adjust-points" placeholder="عدد النقاط (سالب للحذف)" style="flex:1;background:#2a2a2a;border:1px solid var(--egypt-gold);border-radius:8px;padding:10px;color:white;font-family:'Cairo',sans-serif;font-size:14px;">
-        </div>
-        <input type="text" id="adjust-reason" placeholder="السبب (اختياري)" style="background:#2a2a2a;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:10px;color:white;font-family:'Cairo',sans-serif;font-size:13px;">
-        <button class="btn" onclick="adjustPlayerPoints()"><i class="fas fa-edit"></i> تطبيق التعديل</button>
-        <div id="adjust-log" style="font-size:11px;color:var(--egypt-gray);max-height:100px;overflow-y:auto;"></div>
+        <input type="number" id="adjust-points" placeholder="عدد النقاط (موجب للزيادة، سالب للحذف)" style="width:100%;background:#2a2a2a;border:1px solid var(--egypt-gold);border-radius:8px;padding:10px;color:white;font-family:'Cairo',sans-serif;font-size:14px;">
+        <input type="text" id="adjust-reason" placeholder="السبب (اختياري — مثال: بونص ماتش خاص)" style="background:#2a2a2a;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:10px;color:white;font-family:'Cairo',sans-serif;font-size:13px;">
+        <button class="btn" onclick="adjustPlayerPoints()" style="background:var(--egypt-gold);color:#1a1a1a;"><i class="fas fa-edit"></i> تطبيق التعديل</button>
+        <div id="adjust-log" style="font-size:11px;color:var(--egypt-gray);max-height:120px;overflow-y:auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:8px;"></div>
       </div>
       <div class="sec-label"><i class="fas fa-user-slash"></i> حذف لاعب</div>
       <div id="delete-player-section" style="margin-bottom:16px;">
@@ -1322,7 +1320,20 @@ function areGroupStagesComplete() {
 function fillChampionDropdown() {
   const sel = document.getElementById('champion-pick');
   sel.innerHTML = '<option value="">— اختار البطل —</option>' + ALL_TEAMS.map(t => `<option value="${t}">${t}</option>`);
-  if (CURRENT_PLAYER && FB_PREDS[CURRENT_PLAYER]) sel.value = FB_PREDS[CURRENT_PLAYER].champion || '';
+  if (CURRENT_PLAYER && FB_PREDS[CURRENT_PLAYER]) {
+    const champ = FB_PREDS[CURRENT_PLAYER].champion || '';
+    sel.value = champ;
+    // البطل بيتقفل لو اللاعب اختاره قبل كده
+    if (champ) {
+      sel.disabled = true;
+      sel.style.opacity = '0.6';
+      sel.title = 'تم اختيار البطل ومش ممكن تغييره';
+    } else {
+      sel.disabled = false;
+      sel.style.opacity = '1';
+      sel.title = '';
+    }
+  }
 }
 function onNameInput() {
   const name = document.getElementById('player-name').value.trim();
