@@ -1381,16 +1381,15 @@ function getKnockoutNote(m, pred, res) {
   const colors = { 
   4: ['#4a3800','#ffd700','🏆'], 
   3: ['#1a5c2e','#80f0a0','🎯'], 
-  2: ['#3a1a5c','#d7a8f0','⚡'], 
-  1: ['#1a3a5c','#a0c0ff','✅'], 
+  2: ['#1a3a5c','#a0c0ff','⚡'],   // ← لون أزرق بدل بنفسجي
+  1: ['#3a1a5c','#d7a8f0','✅'],   // ← لون بنفسجي بدل أزرق
   0: ['#5c1a1a','#ff9090','❌'] 
 };
-  const [bg, col, icon] = colors[pts];
-  const labels = { 
+const labels = { 
   4: `🏆 توقعك صح بالكامل! (تعادل + جزاء) +٤ نقاط`, 
   3: `🎯 نتيجة صح بالكامل! +٣ نقاط`, 
-  2: `⚡ تعادل + جزاء صح! +٢ نقطة`, 
-  1: `✅ عرفت مين عدى! +١ نقطة`, 
+  2: `⚡ فائز صح + فرق أهداف صح! +٢ نقطة`,   // ← التعديل هنا
+  1: `✅ عرفت مين عدى (غلط في فرق الأهداف)! +١ نقطة`, 
   0: `❌ توقع خاطئ! ٠ نقطة` 
 };
   return `<div style="background:${bg};padding:6px 8px;border-radius:12px;margin-top:6px;text-align:center;">
@@ -1404,27 +1403,47 @@ function calcKOPoints(pred, res) {
   const isDrawPred = pa === pb;
   const isDrawRes  = res.a === res.b;
 
+  // ========== حالات التعادل ==========
   if (isDrawPred && isDrawRes) {
-    // الاتنين تعادل
     const penaltyCorrect = pred.penalty && res.penalty && pred.penalty === res.penalty;
     const scoreCorrect   = pa === res.a && pb === res.b;
-    if (penaltyCorrect && scoreCorrect) return 4; // تعادل صح + جزاء صح + نتيجة صح
-    if (penaltyCorrect)                 return 2; // تعادل صح + جزاء صح + نتيجة غلط
-    if (scoreCorrect)                   return 2; // تعادل صح بنتيجة صح + غلط في الجزاء
-    return 1;                                      // تعادل (بأي نتيجة) + غلط في الجزاء
+    
+    // 4 نقاط: تعادل صح + جزاء صح + نتيجة صح
+    if (penaltyCorrect && scoreCorrect) return 4;
+    
+    // 2 نقاط: تعادل صح + جزاء صح (نتيجة غلط)
+    if (penaltyCorrect) return 2;
+    
+    // 2 نقاط: تعادل صح + نتيجة صح (جزاء غلط)
+    if (scoreCorrect) return 2;
+    
+    // 1 نقطة: تعادل صح (بس) - غلط في الجزاء والنتيجة
+    return 1;
   }
 
-  // مش تعادل
-  if (pa === res.a && pb === res.b && !isDrawRes) return 3; // نتيجة بالضبط
+  // ========== مش تعادل ==========
+  
+  // 3 نقاط: نتيجة بالضبط
+  if (pa === res.a && pb === res.b && !isDrawRes) return 3;
 
-  // مين عدى
-  const predWinner = pa > pb ? 'A' : pa < pb ? 'B' : (pred.penalty || null);
-  const resWinner  = res.a > res.b ? 'A' : res.a < res.b ? 'B' : (res.penalty || null);
-  if (predWinner && resWinner && predWinner === resWinner) return 1;
+  // ✅ 2 نقاط: الفائز صح + فرق الأهداف صح
+  const predWinner = pa > pb ? 'A' : pa < pb ? 'B' : null;
+  const resWinner  = res.a > res.b ? 'A' : res.a < res.b ? 'B' : null;
+  
+  if (predWinner && resWinner && predWinner === resWinner) {
+    // فرق الأهداف (نفس الفرق بين الأرقام)
+    const predDiff = pa - pb;
+    const actualDiff = res.a - res.b;
+    if (predDiff === actualDiff) {
+      return 2; // ← التعديل هنا: 2 نقطة بدل 1
+    }
+    // 1 نقطة: الفائز صح بس (فرق الأهداف غلط)
+    return 1;
+  }
 
+  // 0 نقطة: غلط تماماً
   return 0;
 }
-
 function renderPredictMatches(si) {
   const stage = FB_STAGES?.[si];
   if (!stage) { document.getElementById('predict-matches-container').innerHTML = ''; return; }
