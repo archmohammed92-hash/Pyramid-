@@ -845,36 +845,51 @@ function getMatchWinner(matchId) {
   return null;
 }
 
+// ترتيب الـ bracket الثابت — كل ماتش في دور إيه بيوديله مين في الدور اللي بعده
+// (المؤشر هنا هو ترتيب الـ id زي ما هو معرف في المصفوفات فوق، مش ترتيب التاريخ)
+const BRACKET_MAP = {
+  round_of_32: ['r32_1','r32_4','r32_2','r32_5','r32_3','r32_6','r32_7','r32_8','r32_9','r32_10','r32_11','r32_12','r32_13','r32_16','r32_14','r32_15'],
+  round_of_16: ['r16_1','r16_3','r16_2','r16_4','r16_5','r16_6','r16_7','r16_8'],
+  quarter_final: ['qf_1','qf_3','qf_2','qf_4'],
+  semi_final: ['sf_1','sf_2']
+};
+
 function propagateWinners() {
-  // الفائزين: يروحوا للمرحلة التالية
-  const winnerPath = ['round_of_32','round_of_16','quarter_final','semi_final','final'];
-  for (let si = 0; si < winnerPath.length - 1; si++) {
-    const cur  = FB_STAGES?.find(s => s.id === winnerPath[si]);
-    const next = FB_STAGES?.find(s => s.id === winnerPath[si + 1]);
-    if (!cur || !next) continue;
-    const sorted = [...cur.matches].sort((a,b) => new Date(a.date)-new Date(b.date));
-    sorted.forEach((m, idx) => {
-      const winner = getMatchWinner(m.id);
-      if (!winner) return;
-      const nm = next.matches[Math.floor(idx/2)];
-      if (!nm) return;
-      if (idx % 2 === 0) nm.teamA = winner;
-      else               nm.teamB = winner;
-    });
-  }
+  // دور الـ٣٢ → دور الـ١٦ (حسب ترتيب البراكت الثابت في الصورة، مش التاريخ)
+  applyBracketStage('round_of_32', 'round_of_16', BRACKET_MAP.round_of_32);
+  // دور الـ١٦ → ربع النهائي
+  applyBracketStage('round_of_16', 'quarter_final', BRACKET_MAP.round_of_16);
+  // ربع النهائي → نصف النهائي
+  applyBracketStage('quarter_final', 'semi_final', BRACKET_MAP.quarter_final);
+  // نصف النهائي → النهائي
+  applyBracketStage('semi_final', 'final', BRACKET_MAP.semi_final);
 
   // الخاسرين في نصف النهائي → مباراة الثالث والرابع
   const semi  = FB_STAGES?.find(s => s.id === 'semi_final');
   const third = FB_STAGES?.find(s => s.id === 'third_place');
   if (semi && third && third.matches[0]) {
-    const sorted = [...semi.matches].sort((a,b) => new Date(a.date)-new Date(b.date));
-    sorted.forEach((m, idx) => {
-      const loser = getMatchLoser(m.id);
+    const order = BRACKET_MAP.semi_final;
+    order.forEach((mid, idx) => {
+      const loser = getMatchLoser(mid);
       if (!loser) return;
       if (idx === 0) third.matches[0].teamA = loser;
       else           third.matches[0].teamB = loser;
     });
   }
+}
+
+// بتاخد ماتشات مرحلة بترتيب الـ bracket الثابت وتوزع الفائزين زوج زوج على المرحلة التالية
+function applyBracketStage(curId, nextId, order) {
+  const next = FB_STAGES?.find(s => s.id === nextId);
+  if (!next || !order) return;
+  order.forEach((mid, idx) => {
+    const winner = getMatchWinner(mid);
+    if (!winner) return;
+    const nm = next.matches[Math.floor(idx / 2)];
+    if (!nm) return;
+    if (idx % 2 === 0) nm.teamA = winner;
+    else               nm.teamB = winner;
+  });
 }
 
 function getMatchLoser(matchId) {
